@@ -30,6 +30,7 @@ About 2 hours
 ### Run the test
 ```shell
 git clone git@github.com:chenronglin/Task-Reduce-Transaction-Payload.git
+cd Task-Reduce-Transaction-Payload/
 npm i
 npx hardhat compile
 npx hardhat node # open a new terminal
