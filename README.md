@@ -1,46 +1,40 @@
-# Advanced Sample Hardhat Project
+# Task Reduce Transaction Payload
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+Reduce Transaction Payload
+Imagine we have a method M to our smart contract. M takes 6 parameters as inputs. Due to some contract restriction, their types are fixed as below:
+- Param1: uint256
+- Param2: uint256
+- Param3: uint256
+- Param4: address
+- Param5: uint256
+- Param6: uint256
+Upon close examination, we realized that the range of the parameters are as follows:
+- Param1: greater than 0 but less than 1, only needs first 4 decimals
+- Param2: greater than 0 but less than 1, only needs first 4 decimals
+- Param3: greater than 1 but less than 2, only needs first 4 decimals
+- Param4: none zero address
+- Param5: greater than 0 but less than 1, only needs first 4 decimals
+- Param6: greater than 1 but less than 2, only needs first 4 decimals
+Due to contract logic, except Param4, the rest of the parameters are scaled to 1e18 for decimals processing. At the same time, if users are not using what parameters to use for Param1 - Param6, the contract will provide them with default values. In this case, we realized 90% of the users will use default values instead.
+For this task, please design a solution that reduces the transaction data sent from Web3 client to this method M as much as possible. You can assume M is just a dummy function, it does not do anything, what matters is the transaction data reduction.
+For the language, you should use solidity as the smart contract language. For the client, you can use Typescript/Rust. If it is possible, please provide a full docker dev environment.
+To submit the exercise, you can upload to a public git repo or private git repo and add our devs to the project.
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
 
-Try running some of the following tasks:
+### Solution:
+Overloading the function M
 
+### Spend time
+About 2 hours
+
+### Run the test
 ```shell
-npx hardhat accounts
+git clone git@github.com:chenronglin/Task-Reduce-Transaction-Payload.git
+npm i
 npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
+npx hardhat node # open a new terminal
+npx hardhat test --network localhost
 ```
 
-# Etherscan verification
-
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
-
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
-
-```shell
-hardhat run --network ropsten scripts/deploy.ts
-```
-
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
-
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
-
-# Performance optimizations
-
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+### TODO
+provide a full docker dev 
