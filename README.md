@@ -37,5 +37,11 @@ npx hardhat node # open a new terminal
 npx hardhat test --network localhost
 ```
 
-### TODO
-provide a full docker dev 
+### Docker
+```shell
+# pull
+sudo docker pull chenronglin/my_hardhat:0.1
+# run tester
+docker run -it --rm -v $(pwd):/app chenronglin/my_hardhat:0.1
+npx hardhat test
+```
