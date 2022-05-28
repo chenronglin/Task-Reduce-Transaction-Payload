@@ -8,7 +8,7 @@ describe("Greeter", function () {
     await greeter.deployed();
 
     for (let index = 0; index < 100; index++) {
-      if (index % 10 == 6) {
+      if (index % 10 != 6) {
         console.log('No Params Call M()', index);
         expect(await greeter["M()"]());
       } else {
