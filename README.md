@@ -40,7 +40,7 @@ npx hardhat test --network localhost
 ### Docker
 ```shell
 # build
-sudo docker build -t my_hardhat:v0.1 .
+sudo docker build -t chenronglin/my_hardhat:0.1 .
 # run tester
 sudo docker run -it --rm -v $(pwd):/app chenronglin/my_hardhat:0.1
 npx hardhat test
